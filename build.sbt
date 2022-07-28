@@ -6,7 +6,7 @@ def p(flavour: Flavour): Project = {
       organization := "com.olvind.st-material-ui",
       name := s"st-material-ui-${flavour.id}",
       version := "0.1",
-//      crossScalaVersions := List("2.13.7", "3.1.0"),
+      // crossScalaVersions := List("2.13.7", "3.1.0"),
       scalaVersion := "3.1.0",
       /* javascript / typescript deps */
       Compile / npmDependencies ++= Seq(
@@ -50,5 +50,5 @@ def p(flavour: Flavour): Project = {
     )
 }
 
-lazy val muiSlinky       = p(Flavour.ScalajsReact)
-lazy val muiScalaJsReact = p(Flavour.Slinky)
+lazy val muiSlinky       = p(Flavour.Slinky)
+lazy val muiScalaJsReact = p(Flavour.ScalajsReact)
