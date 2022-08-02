@@ -3,10 +3,10 @@ def p(flavour: Flavour): Project = {
   Project(id, file(id))
     .enablePlugins(ScalablyTypedConverterGenSourcePlugin)
     .settings(
-      organization := "com.olvind.st-material-ui",
+      organization := "com.olvind",
       name := s"st-material-ui-${flavour.id}",
+      crossScalaVersions := List("2.13.7", "3.1.0"),
       version := "0.1",
-      // crossScalaVersions := List("2.13.7", "3.1.0"),
       scalaVersion := "3.1.0",
       /* javascript / typescript deps */
       Compile / npmDependencies ++= Seq(
@@ -14,12 +14,18 @@ def p(flavour: Flavour): Project = {
         "@emotion/styled" -> "11.6.0",
         "@mui/material" -> "5.2.6",
         "@mui/icons-material" -> "5.2.5",
+	"@mui/base" -> "5.0.0-alpha.62",
+	"@mui/system" -> "5.2.6",
+	"@mui/private-theming" -> "5.2.3",
+	"@mui/styled-engine" -> "5.2.6",
         "@types/react" -> "17.0.38",
         "@types/react-dom" -> "17.0.11",
         "@types/stylis" -> "4.0.2",
         "react" -> "17.0.2",
         "react-dom" -> "17.0.2",
       ),
+      // docs are huge and unnecessary
+      Compile / doc / sources := Nil,
       // shade into another package
       stOutputPackage := "com.olvind.mui",
       stSourceGenMode := SourceGenMode.Manual(baseDirectory.value / s"src/main/scala-${scalaVersion.value.takeWhile(_ != '.')}"),
@@ -51,4 +57,4 @@ def p(flavour: Flavour): Project = {
 }
 
 lazy val muiSlinky       = p(Flavour.Slinky)
-lazy val muiScalaJsReact = p(Flavour.ScalajsReact)
+// lazy val muiScalaJsReact = p(Flavour.ScalajsReact)
